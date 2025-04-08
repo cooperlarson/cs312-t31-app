@@ -1,0 +1,27 @@
+@use 'styles' as *;
+
+.bio-card {
+  background: $primary;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  text-align: center;
+  color: white;
+  width: fit-content;
+
+  img {
+    height: 350px;
+    max-width: 100%;
+    border-radius: 15px;
+  }
+
+  h2 {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}

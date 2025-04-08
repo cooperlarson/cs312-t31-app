@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+// color palette
+$primary: #0b2a4a;
+$secondary: #d8ecff;
+$bg-off-white: #f4f4f4;
+
+
+body {
+  margin: 0;
+}
+
+section {
+  margin: 30px auto 0;
+  width: 95vw;
+  min-height: 100vh;
+  background-color: $bg-off-white;
+  position: fixed;
+  top: 0;
+}

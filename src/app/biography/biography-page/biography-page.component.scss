@@ -1,0 +1,33 @@
+@use 'styles' as *;
+
+.biography-page {
+  padding: 2rem;
+  background: $secondary;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    color: $primary;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  app-biography-card {
+    flex: 1 1 calc(50% - 2rem);
+    box-sizing: border-box;
+    max-width: calc(50% - 2rem);
+
+    @media (max-width: 768px) {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+}

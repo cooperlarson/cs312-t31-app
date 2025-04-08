@@ -1,0 +1,11 @@
+<section class="biography-page">
+  <h1>Meet the Members of Team 31</h1>
+  <div class="card-container">
+    <app-biography-card
+      *ngFor="let bio of bios"
+      [name]="bio.name"
+      [description]="bio.description"
+      [image]="bio.image"
+    ></app-biography-card>
+  </div>
+</section>
