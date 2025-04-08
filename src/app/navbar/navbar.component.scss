@@ -1,0 +1,40 @@
+@use 'styles' as *;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $primary;
+  color: white;
+  padding: 1rem 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  // stick to top
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  a {
+    color: #ffffff;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &.active {
+      color: #80d0ff;
+    }
+  }
+
+  .team-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+}
