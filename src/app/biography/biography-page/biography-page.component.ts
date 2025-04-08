@@ -20,5 +20,12 @@ export class BiographyPageComponent {
         'working on my truck, 3D printer, or various side projects.',
       image: 'images/Cooper.jpg',
     },
+    {
+      name: 'Dominik David',
+      description: 'I am a junior computer science major and have been programming for around 12 years ' +
+      'since I got into making video games. I also play bass and sing in a band called The Hyms, and ' +
+      'enjoy outdoor activities like slacklining, climbing and biking.',
+      image: 'images/Dominik.jpg',
+    },
   ]
 }
