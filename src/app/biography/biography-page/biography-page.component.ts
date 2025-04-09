@@ -27,5 +27,11 @@ export class BiographyPageComponent {
       'enjoy outdoor activities like slacklining, climbing and biking.',
       image: 'images/Dominik.jpg',
     },
+    {
+      name: 'Spencer Williams',
+      description: 'I am a junior computer science major and am relatively new to programming, ' +
+      'I also enjoy the gym, riding my motorcycle, and video games. This year I have also taken up skiing.',
+      image: 'images/Spencer.jpg',
+    }
   ]
 }
