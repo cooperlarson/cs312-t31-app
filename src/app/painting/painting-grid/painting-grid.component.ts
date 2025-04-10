@@ -11,6 +11,7 @@ import { NgForOf } from '@angular/common';
 })
 export class PaintingGridComponent {
   rows = Array.from({ length: 100 }, (_, i) => i + 1);
+
   getColumnNames() {
     let cols = [];
     for (let i = -1;i<26;i++) {
@@ -21,5 +22,9 @@ export class PaintingGridComponent {
       }
     }
     return cols;
+  }
+
+  click(rn: String, cn: String) {
+    alert(rn+","+cn);
   }
 }
