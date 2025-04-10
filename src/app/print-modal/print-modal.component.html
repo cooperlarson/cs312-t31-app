@@ -1,0 +1,13 @@
+<div class="print-modal-backdrop" (click)="cancel()">
+  <div class="print-modal" (click)="$event.stopPropagation()">
+    <h2>Print Options</h2>
+    <p>Do you want to print in grayscale?</p>
+    <div class="button-group">
+      <button (click)="confirm(true)" class="grayscale-btn">Grayscale</button>
+      <button (click)="confirm(false)" class="color-btn">Full Color</button>
+    </div>
+    <div class="button-group">
+      <button (click)="cancel()" class="cancel-btn">Cancel</button>
+    </div>
+  </div>
+</div>

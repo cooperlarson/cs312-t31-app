@@ -1,3 +1,19 @@
+// Global helper functions
+@function fade($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+@function darken-gradient($colors, $amount: 10%) {
+  $darkened-colors: ();
+
+  @each $color in $colors {
+    $dark-color: if(type-of($color) == 'color', darken($color, $amount), $color);
+    $darkened-colors: append($darkened-colors, $dark-color, comma);
+  }
+
+  @return $darkened-colors;
+}
+
 // color palette
 $primary: #0b2a4a;
 $secondary: #d8ecff;
@@ -7,18 +23,65 @@ $success: #3b945e;
 $warning: #d9822b;
 $error: #c23030;
 $bg-off-white: #f4f4f4;
+$black-50: fade(black, 0.5);
 
+// gradients
+$rainbow-colors: red, orange, yellow, green, blue, indigo, violet;
+$grayscale-colors: #111111, #2a2a2a, #444444, #666666, #888888, #bbbbbb, #eeeeee;
+$rainbow-gradient: linear-gradient(90deg, darken-gradient($rainbow-colors, 10%));
 
+// global styles
 body {
   margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 section {
   margin: 80px auto 0;
   width: 100vw;
-  padding: 0 2.5vh;
   min-height: 100vh;
   background-color: $muted;
   position: absolute;
   top: 0;
+}
+
+// Print styles
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+
+    // Apply grayscale *only if* class is present
+    &.grayscale-mode {
+      filter: grayscale(100%) !important;
+    }
+  }
+
+  .navbar,
+  .sidebar,
+  .footer,
+  .non-printable,
+  .print-hidden {
+    display: none !important;
+  }
+
+  .printable-content {
+    display: block !important;
+  }
+}
+
+.print-mode {
+  font-family: serif;
+  background: white;
+  color: black;
+
+  * {
+    box-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.grayscale-mode {
+  filter: grayscale(100%);
 }
