@@ -1,5 +1,7 @@
+@use 'styles' as *;
+
 .site-footer {
-  background-color: #0b2a4a;
+  background-color: $primary;
   color: white;
   padding: 1rem 2rem;
   text-align: center;

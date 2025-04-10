@@ -1,6 +1,11 @@
 // color palette
 $primary: #0b2a4a;
 $secondary: #d8ecff;
+$accent: #ffb400;
+$muted: #7a8a99;
+$success: #3b945e;
+$warning: #d9822b;
+$error: #c23030;
 $bg-off-white: #f4f4f4;
 
 
@@ -9,10 +14,11 @@ body {
 }
 
 section {
-  margin: 30px auto 0;
-  width: 95vw;
+  margin: 80px auto 0;
+  width: 100vw;
+  padding: 0 2.5vh;
   min-height: 100vh;
-  background-color: $bg-off-white;
-  position: fixed;
+  background-color: $muted;
+  position: absolute;
   top: 0;
 }

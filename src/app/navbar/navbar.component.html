@@ -1,7 +1,9 @@
 <nav class="navbar">
   <div class="navbar-left">
-    <img [src]="logo.src" [alt]="logo.alt" class="logo" />
-    <span class="brand-text">{{ brand }}</span>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <img [src]="logo.src" [alt]="logo.alt" class="logo" />
+      <span class="brand-text">{{ brand }}</span>
+    </a>
   </div>
   <div class="navbar-right">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>

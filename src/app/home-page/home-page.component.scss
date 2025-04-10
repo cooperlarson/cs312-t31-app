@@ -1,0 +1,47 @@
+.home-page-header {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  right: 2rem;
+
+  .brand-logo {
+      height: 80px;
+      margin-bottom: 20px;
+  }
+
+  .brand-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .brand-tagline {
+    font-size: 1.4rem;
+    margin: 0.5rem 0 0;
+    font-weight: 400;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page-header {
+    height: 190px;
+
+    .brand-name {
+      font-size: 2rem;
+    }
+
+    .brand-tagline {
+      font-size: 1rem;
+    }
+  }
+}

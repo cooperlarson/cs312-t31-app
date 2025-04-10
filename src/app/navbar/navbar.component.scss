@@ -15,9 +15,33 @@
   top: 0;
   z-index: 1000;
 
+  a {
+    color: #ffffff;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &.active {
+      color: #80d0ff;
+    }
+  }
+
   .navbar-left {
     display: flex;
     align-items: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      margin: 0;
+    }
 
     .brand-text {
       font-size: 1.8rem;
@@ -35,22 +59,5 @@
 
   .navbar-right {
     font-size: 1.1rem;
-  }
-
-  a {
-    color: #ffffff;
-    margin-left: 1.5rem;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:hover,
-    &.active {
-      color: #80d0ff;
-    }
   }
 }
