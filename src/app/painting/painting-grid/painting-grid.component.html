@@ -1,0 +1,14 @@
+<div class="container">
+  <table class="gridTable">
+    <tr>
+        <td class="gridName">~</td>
+        <td class="gridName" *ngFor="let cn of getColumnNames()">{{ cn }}</td>
+    </tr>
+    <tr *ngFor="let rn of rows; let i = index">
+        <td class="gridName">{{ rn }}</td>
+        <td *ngFor="let cn of getColumnNames(); let j = index">
+            <div (click)="click(cn, rn.toString())" class="gridCell"></div>
+        </td>
+    </tr>
+  </table>
+</div>
