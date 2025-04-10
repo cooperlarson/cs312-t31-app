@@ -11,5 +11,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-
+  brand = 'HueGrid'
+  logo = {
+    src: 'images/HueGrid_logo.png',
+    alt: 'HueGrid Logo',
+  }
 }

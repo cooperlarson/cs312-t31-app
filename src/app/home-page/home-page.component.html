@@ -1,0 +1,19 @@
+<section class="home-page">
+  <header class="home-page-header">
+    <img [src]="logo.src" [alt]="logo.alt" class="brand-logo" />
+    <h1 class="brand-name">{{ header_title }}</h1>
+    <h2 class="brand-tagline">{{ header_subtitle }}</h2>
+  </header>
+
+  <div class="print-btn-container">
+    <button class="print-btn" (click)="triggerPrint()">
+      <span class="print-icon">🖨️</span>Print
+    </button>
+  </div>
+</section>
+
+<app-print-modal
+  *ngIf="showPrintModal"
+  (onDecision)="handlePrint($event)"
+  (onCancel)="showPrintModal = false">
+</app-print-modal>
