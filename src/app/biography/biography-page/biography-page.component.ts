@@ -32,6 +32,13 @@ export class BiographyPageComponent {
       description: 'I am a junior computer science major and am relatively new to programming, ' +
       'I also enjoy the gym, riding my motorcycle, and video games. This year I have also taken up skiing.',
       image: 'images/Spencer.jpg',
+    },
+    {
+      name: 'Noah Kivett',
+      description: 'I am a Senior computer science student and I have been programming for around 7 years.' +
+      'When I am not programming for classes, I am playing any videogame I can get my hands on. Whether its VR, ' +
+      'handheld, console, or PC; I enjoy playing and testing new gaming experiences.',
+      image: 'images/Noah.png',
     }
   ]
 }
