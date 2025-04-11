@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
   formData = {
     rows: 0,
     cols: 0,
-    color: ''
+    color: 0
   };
 
   constructor(private fb: FormBuilder) {}
@@ -39,7 +39,7 @@ export class HomePageComponent implements OnInit {
     this.form = this.fb.group({
       rows: [1, [Validators.required, Validators.min(1), Validators.max(1000)]],
       cols: [1, [Validators.required, Validators.min(1), Validators.max(702)]],
-      color: ['', Validators.required]
+      color: [1, [Validators.required, Validators.min(1), Validators.max(10)]]
     });
   }
 

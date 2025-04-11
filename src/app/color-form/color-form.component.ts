@@ -30,7 +30,9 @@ export class ColorFormComponent {
       max: 'Maximum value is 702'
     },
     color: {
-      required: 'Color is required'
+      required: 'Color is required',
+      min: 'Minimum value is 1',
+      max: 'Maximum value is 10'
     }
   };
 
