@@ -21,11 +21,8 @@
   </div>
 
   <div class="form-control">
-    <label for="color">Color</label>
-    <select id="color" formControlName="color">
-      <option value="" disabled selected hidden>Select a color</option>
-      <option *ngFor="let c of colors" [value]="c">{{ c | titlecase }}</option>
-    </select>
+    <label for="color">Colors (1 - 10)</label>
+    <input type="number" id="color" formControlName="color" />
     <div class="warning" *ngIf="isTouchedAndInvalid('color')">
       <ng-container *ngFor="let errorKey of getErrorKeys('color')">
         <span>{{ getErrorMessage('color', errorKey) }}</span>
