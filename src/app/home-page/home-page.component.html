@@ -5,18 +5,29 @@
     <h2 class="brand-tagline">{{ header_subtitle }}</h2>
   </header>
 
-  <div class="form-wrapper">
+  <div class="content">
+    <div class="form-wrapper">
       <app-color-form
+        *ngIf="formState === 1"
         [form]="form"
         [colors]="colors"
         (submitted)="onFormSubmitted()"
       ></app-color-form>
-  </div>
+    </div>
 
-  <div class="print-btn-container">
-    <button class="print-btn" (click)="triggerPrint()">
-      <span class="print-icon">🖨️</span>Print
-    </button>
+    <app-color-selection
+      *ngIf="formState >= 2"
+      [rows]="colorTableRows"
+      [allColors]="colors"
+      (rowSelected)="handleRowSelected($event)"
+      (colorChanged)="handleColorChange($event)"
+    ></app-color-selection>
+
+    <div class="print-btn-container">
+      <button class="print-btn" (click)="triggerPrint()">
+        <span class="print-icon">🖨️</span>Print
+      </button>
+    </div>
   </div>
 </section>
 

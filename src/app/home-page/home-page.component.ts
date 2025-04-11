@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ColorFormComponent } from '../color-form/color-form.component';
 import { NgIf } from '@angular/common';
 import { PrintModalComponent } from '../print-modal/print-modal.component';
+import { ColorSelectionComponent } from '../painting/color-selection/color-selection.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, PrintModalComponent],
+  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, PrintModalComponent, ColorSelectionComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -21,18 +22,16 @@ export class HomePageComponent implements OnInit {
 
   showPrintModal = false;
 
-  formState = 1;
+  formState = 1;  // Global form state
+
+  /////////// COLOR FORM ///////////
+
   form!: FormGroup;
   formData = {
     rows: 0,
     cols: 0,
     color: ''
   };
-
-  colors = [
-    'red', 'blue', 'green', 'purple', 'pink',
-    'yellow', 'orange', 'black', 'white', 'brown'
-  ];
 
   constructor(private fb: FormBuilder) {}
 
@@ -47,8 +46,47 @@ export class HomePageComponent implements OnInit {
   onFormSubmitted(): void {
     this.formData = this.form.value;
     console.log('Form Data Received:', this.formData);
+    this.initColorTable(this.formData.rows)
     ++this.formState; // Increment form state to show the next step
   }
+
+  /////////// COLOR SELECTION TABLE ///////////
+
+  // THIS SHOULD NOT BE DELETED, USED WITH 'color-selection.component.ts'
+  colorTableRows: { selected: boolean, color: string }[] = [];
+  colors: string[] = [
+    'red', 'orange', 'yellow', 'green', 'blue',
+    'purple', 'grey', 'brown', 'black', 'teal'
+  ];
+
+  initColorTable(rowCount: number) {
+    this.colorTableRows = [];
+    for (let i = 0; i < rowCount; i++) {
+      this.colorTableRows.push({
+        selected: false,
+        color: this.colors[i % this.colors.length]
+      });
+    }
+  }
+
+  handleRowSelected(index: number) {
+    this.colorTableRows.forEach((row, i) => row.selected = i === index);
+  }
+
+  handleColorChange(event: { index: number, color: string }) {
+    const { index, color } = event;
+
+    // Prevent duplicate colors
+    const isUsed = this.colorTableRows.some((row, i) => row.color === color && i !== index);
+    if (isUsed) {
+      alert('Color already used. Pick a different one.');
+      return;
+    }
+
+    this.colorTableRows[index].color = color;
+  }
+
+  ///////////// PRINTING ///////////
 
   triggerPrint(): void {
     this.showPrintModal = true;
