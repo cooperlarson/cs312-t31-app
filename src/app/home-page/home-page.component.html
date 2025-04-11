@@ -5,6 +5,14 @@
     <h2 class="brand-tagline">{{ header_subtitle }}</h2>
   </header>
 
+  <div class="form-wrapper">
+      <app-color-form
+        [form]="form"
+        [colors]="colors"
+        (submitted)="onFormSubmitted()"
+      ></app-color-form>
+  </div>
+
   <div class="print-btn-container">
     <button class="print-btn" (click)="triggerPrint()">
       <span class="print-icon">🖨️</span>Print

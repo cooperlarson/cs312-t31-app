@@ -1,27 +1,56 @@
-import { Component } from '@angular/core';
-import { PrintModalComponent } from '../print-modal/print-modal.component';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ColorFormComponent } from '../color-form/color-form.component';
 import { NgIf } from '@angular/common';
+import { PrintModalComponent } from '../print-modal/print-modal.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [
-    PrintModalComponent,
-    NgIf
-  ],
+  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, PrintModalComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   header_title = 'HueGrid';
   header_subtitle = 'Your Color Palette Companion';
+
   logo = {
     src: 'images/HueGrid_logo.png',
     alt: 'HueGrid Logo',
-  }
+  };
 
   showPrintModal = false;
 
-  triggerPrint() {
+  formState = 1;
+  form!: FormGroup;
+  formData = {
+    rows: 0,
+    cols: 0,
+    color: ''
+  };
+
+  colors = [
+    'red', 'blue', 'green', 'purple', 'pink',
+    'yellow', 'orange', 'black', 'white', 'brown'
+  ];
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      rows: [1, [Validators.required, Validators.min(1), Validators.max(1000)]],
+      cols: [1, [Validators.required, Validators.min(1), Validators.max(702)]],
+      color: ['', Validators.required]
+    });
+  }
+
+  onFormSubmitted(): void {
+    this.formData = this.form.value;
+    console.log('Form Data Received:', this.formData);
+    ++this.formState; // Increment form state to show the next step
+  }
+
+  triggerPrint(): void {
     this.showPrintModal = true;
   }
 
@@ -43,17 +72,13 @@ export class HomePageComponent {
     }, 100);
   }
 
-  prepareDOMForPrint() {
+  prepareDOMForPrint(): void {
     const dropdowns = document.querySelectorAll('.dropdown, .radio-group, .interactive-ui');
     dropdowns.forEach(el => el.classList.add('print-hidden'));
-
-    // TODO - Cooper: remove any other elements that should not be printed
   }
 
-  restoreDOMAfterPrint() {
+  restoreDOMAfterPrint(): void {
     const hiddenEls = document.querySelectorAll('.print-hidden');
     hiddenEls.forEach(el => el.classList.remove('print-hidden'));
-
-    // TODO - Cooper: restore any other elements that were hidden for printing
   }
 }

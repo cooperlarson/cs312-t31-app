@@ -1,0 +1,87 @@
+@use 'styles' as *;
+
+$form-bg: rgba(255, 255, 255, 0.5);
+$input-bg: rgba(darken($primary, 10%), 0.6);
+$text-color: #ffffff;
+
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: $form-bg;
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label {
+    margin-bottom: 0.5rem;
+    color: $primary;
+    font-size: 1.1rem;
+    text-shadow: rgba(black, 0.2) 1px 1px 1px;
+  }
+
+  input,
+  select {
+    background: $input-bg;
+    color: $text-color;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    padding: 1rem 0.75rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s ease;
+  }
+}
+
+.warning {
+  color: $error;
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border: 1px solid $error;
+}
+
+input.ng-valid.ng-touched,
+select.ng-valid.ng-touched {
+  border: 2px solid $success;
+  box-shadow: 0 0 0 2px rgba($success, 0.1);
+}
+
+button {
+  background: $success;
+  color: #000;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+
+  &:hover:not(:disabled) {
+    background: darken($success, 10%);
+  }
+
+  &:disabled {
+    background: $muted;
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+button:hover {
+  background: darken($success, 10%);
+}
