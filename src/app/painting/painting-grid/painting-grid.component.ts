@@ -3,6 +3,7 @@ import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-painting-grid',
+  standalone: true,
   imports: [
     NgForOf
   ],

@@ -4,10 +4,11 @@ import { ColorFormComponent } from '../color-form/color-form.component';
 import { NgIf } from '@angular/common';
 import { PrintModalComponent } from '../print-modal/print-modal.component';
 import { ColorSelectionComponent } from '../painting/color-selection/color-selection.component';
+import { PaintingGridComponent } from '../painting/painting-grid/painting-grid.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, PrintModalComponent, ColorSelectionComponent],
+  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, PrintModalComponent, ColorSelectionComponent,PaintingGridComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
