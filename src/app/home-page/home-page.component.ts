@@ -171,6 +171,8 @@ export class HomePageComponent implements OnInit {
 
     const footer = document.querySelector('footer');
     footer && footer.classList.add('print-hidden');
+
+    this.chunkTableForPrint();
   }
 
   restoreDOMAfterPrint(): void {
@@ -180,4 +182,48 @@ export class HomePageComponent implements OnInit {
     const printModeEls = document.querySelectorAll('.print-mode');
     printModeEls.forEach(el => el.classList.remove('print-mode'));
   }
+
+  chunkTableForPrint = (colsPerPage = 21, rowsPerPage = 30) => {
+    const fullTable = document.querySelector('.gridTable') as HTMLTableElement;
+    const container = document.querySelector('.container.painting-grid');
+
+    if (!fullTable || !container) return;
+
+    const totalCols = fullTable.rows[0].cells.length;
+    const totalRows = fullTable.rows.length;
+
+    for (let colStart = 0; colStart < totalCols; colStart += colsPerPage) {
+      for (let rowStart = 0; rowStart < totalRows; rowStart += rowsPerPage) {
+        const chunkedTable = document.createElement('table');
+        chunkedTable.className = 'gridTable chunked';
+
+        for (let r = rowStart; r < Math.min(rowStart + rowsPerPage, totalRows); r++) {
+          const originalRow = fullTable.rows[r];
+          const newRow = document.createElement('tr');
+
+          for (let c = colStart; c < Math.min(colStart + colsPerPage, totalCols); c++) {
+            const cell = originalRow.cells[c];
+            if (!cell) continue;
+
+            const newCell = document.createElement(cell.tagName.toLowerCase());
+            newCell.innerHTML = cell.innerHTML;
+            newCell.className = cell.className;
+            newCell.style.border = '';
+
+            newRow.appendChild(newCell);
+          }
+
+          chunkedTable.appendChild(newRow);
+        }
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'print-grid-chunk';
+        wrapper.appendChild(chunkedTable);
+        container.appendChild(wrapper);
+      }
+    }
+
+    fullTable.style.display = 'none';
+  };
+
 }

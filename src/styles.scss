@@ -76,6 +76,25 @@ section {
   .printable-content {
     display: block !important;
   }
+
+  .gridTable {
+    border-collapse: collapse !important;
+    border: none !important;
+    width: auto;
+
+    td, th {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 30px !important;
+      height: 30px !important;
+    }
+  }
+
+  .print-grid-chunk {
+    page-break-after: always;
+    display: block;
+    margin-bottom: 1rem;
+  }
 }
 
 .print-mode {

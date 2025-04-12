@@ -36,6 +36,8 @@
     color: black;
 
     &.print-mode {
+      overflow: visible;
+
       .gridCell {
         border: 1px solid black;
       }
