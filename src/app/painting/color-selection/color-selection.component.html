@@ -1,9 +1,10 @@
 <div class="app-color-selection-intro">
   <h2>Select a color for each row</h2>
+  <h2 class="print-title">Color Selection</h2>
   <h3>You can only use each color once!</h3>
 </div>
 
-<table style="width: 100%;">
+<table class="color-selection-table" style="width: 100%;">
   <tr *ngFor="let row of rows; let i = index">
     <td style="width: 20%;">
       <input

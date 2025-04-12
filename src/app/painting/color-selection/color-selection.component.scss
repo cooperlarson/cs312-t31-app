@@ -1,3 +1,5 @@
+@use 'styles' as *;
+
 table {
   margin: 0 auto;
   border-collapse: collapse;
@@ -10,7 +12,8 @@ td {
 
 select {
   margin-left: 10px;
-  text-shadow: 0px 0px 1px black;
+  text-shadow: 0 0 1px $black-50;
+  font-size: 1.1rem;
 }
 
 h2{
@@ -18,6 +21,10 @@ h2{
   text-align: center;
   color:white;
   text-shadow: 1px 1px 5px black;
+
+  &.print-title {
+    display: none;
+  }
 }
 
 h3{
@@ -26,4 +33,42 @@ h3{
   text-align: center;
   color:whitesmoke;
   text-shadow: 1px 1px 5px black;
+}
+
+.app-color-selection-intro.print-mode {
+  h2, h3 {
+    display: none;
+  }
+
+  .print-title {
+    display: block;
+    color: black;
+    text-shadow: none;
+  }
+}
+
+.color-selection-table.print-mode {
+  td {
+    border: solid 1px black;
+  }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    pointer-events: none;
+    user-select: none;
+    outline: none;
+    font-size: 1.4rem;
+  }
+
+  input {
+    display: none;
+  }
 }
