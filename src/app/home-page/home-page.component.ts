@@ -179,7 +179,6 @@ export class HomePageComponent implements OnInit {
     const chunkWrappers = document.querySelectorAll('.print-grid-chunk');
     chunkWrappers.forEach(el => el.remove());
 
-    // 2. Unhide the original grid table
     const fullTable = document.querySelector('.gridTable') as HTMLTableElement;
     if (fullTable) fullTable.style.display = 'block'
 
