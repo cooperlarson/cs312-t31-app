@@ -47,10 +47,22 @@ export class HomePageComponent implements OnInit {
   onFormSubmitted(): void {
     this.formData = this.form.value;
     console.log('Form Data Received:', this.formData);
-    this.initColorTable(this.formData.rows)
+    this.initColorTable(this.formData.color);
+    this.initPaintingGrid(this.formData.rows, this.formData.cols);
     ++this.formState; // Increment form state to show the next step
   }
 
+  /////////// PAINTING GRID ///////////
+
+  // THIS SHOULD NOT BE DELETED, USED WITH 'painting-grid.component.ts'
+  paintingGridColCount: number = 0;
+  paintingGridRowCount: number = 0;
+
+  initPaintingGrid(rowCount: number, colCount: number) {
+    this.paintingGridColCount = colCount;
+    this.paintingGridRowCount = rowCount;
+  }
+  
   /////////// COLOR SELECTION TABLE ///////////
 
   // THIS SHOULD NOT BE DELETED, USED WITH 'color-selection.component.ts'

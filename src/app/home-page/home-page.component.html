@@ -25,6 +25,8 @@
 
     <app-painting-grid
       *ngIf="formState >= 2"
+      [rowCount]="paintingGridRowCount"
+      [colCount]="paintingGridColCount"
     ></app-painting-grid>
 
     <div class="print-btn-container">
