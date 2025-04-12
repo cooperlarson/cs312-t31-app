@@ -1,5 +1,7 @@
 @use 'styles' as *;
 
+$back-btn-color: darken($warning, 10%);
+
 .home-page-header {
   width: 100%;
   height: 220px;
@@ -99,11 +101,11 @@
 
   &.back-btn {
     display: block;
-    background-color: rgba($accent, 0.6);
+    background-color: rgba($back-btn-color, 0.7);
     position: absolute;
 
     &:hover {
-      background-color: rgba($error, 0.8);
+      background-color: rgba($back-btn-color, 0.9);
     }
 
     @media (max-width: 768px) {
