@@ -23,6 +23,10 @@
       (colorChanged)="handleColorChange($event)"
     ></app-color-selection>
 
+    <app-painting-grid
+      *ngIf="formState >= 2"
+    ></app-painting-grid>
+
     <div class="print-btn-container">
       <button class="print-btn" (click)="triggerPrint()">
         <span class="print-icon">🖨️</span>Print
