@@ -176,6 +176,12 @@ export class HomePageComponent implements OnInit {
   }
 
   restoreDOMAfterPrint(): void {
+    const chunkWrappers = document.querySelectorAll('.print-grid-chunk');
+    chunkWrappers.forEach(el => el.remove());
+
+    const fullTable = document.querySelector('.gridTable') as HTMLTableElement;
+    if (fullTable) fullTable.style.display = 'block'
+
     const hiddenEls = document.querySelectorAll('.print-hidden');
     hiddenEls.forEach(el => el.classList.remove('print-hidden'));
 
