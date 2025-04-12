@@ -149,17 +149,13 @@ export class HomePageComponent implements OnInit {
 
   prepareDOMForPrint(): void {
     const navbar = document.querySelector('.navbar');
-    navbar && navbar.classList.add('print-hidden');
+    navbar && navbar.classList.add('print-mode');
 
     const header = document.querySelector('header');
     header && header.classList.add('print-hidden');
 
     const colorSelectionIntro = document.querySelector('.app-color-selection-intro');
     colorSelectionIntro && colorSelectionIntro.classList.add('print-mode');
-    if (colorSelectionIntro) {
-      const colorSelectionTitle = colorSelectionIntro.querySelector('h2');
-      colorSelectionTitle && colorSelectionTitle
-    }
 
     const colorSelectionTable = document.querySelector('.color-selection-table');
     colorSelectionTable && colorSelectionTable.classList.add('print-mode');
