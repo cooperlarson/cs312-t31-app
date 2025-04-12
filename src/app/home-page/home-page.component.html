@@ -19,7 +19,7 @@
 
     <ng-container *ngIf="formState >= 2 && !showPrintModal && !printMode">
       <div class="back-btn-container">
-        <button class="btn back-btn" (click)="backToForm()">Back to Form</button>
+        <button class="btn back-btn" (click)="backToForm()"><span class="icon">⬅️ </span>Back to Form</button>
       </div>
     </ng-container>
 
@@ -39,12 +39,10 @@
 
     <ng-container *ngIf="formState >= 2 && !showPrintModal && !printMode">
       <div class="print-btn-container">
-        <button class="btn print-btn" (click)="triggerPrint()">
-          <span class="print-icon">🖨️</span>Print
-        </button>
+        <button class="btn print-btn" (click)="triggerPrint()"><span class="icon">🖨️ </span>Print</button>
       </div>
       <div class="print-btn-container">
-        <button class="btn reset-btn" (click)="resetForm()">Reset</button>
+        <button class="btn reset-btn" (click)="resetForm()"><span class="icon">🔁 </span>Reset</button>
       </div>
     </ng-container>
   </div>
