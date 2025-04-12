@@ -43,18 +43,28 @@ section {
   background-color: $muted;
   position: absolute;
   top: 0;
+  padding-bottom: 80px;
+
+  &.print-mode {
+    background: white;
+  }
 }
 
 // Print styles
 @media print {
-  body {
-    background: white !important;
-    color: black !important;
 
-    // Apply grayscale *only if* class is present
-    &.grayscale-mode {
-      filter: grayscale(100%) !important;
-    }
+  section {
+    position: static !important;
+    margin: 0 auto !important;
+    width: auto !important;
+    min-height: auto !important;
+    background: white !important;
+    padding: 0 !important;
+  }
+
+  .painting-grid,
+  .color-selection-table {
+    position: static !important;
   }
 
   .navbar,

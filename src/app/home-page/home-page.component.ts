@@ -22,6 +22,7 @@ export class HomePageComponent implements OnInit {
   };
 
   showPrintModal = false;
+  printMode = false;
 
   formState = 1;  // Global form state
 
@@ -62,7 +63,7 @@ export class HomePageComponent implements OnInit {
     this.paintingGridColCount = colCount;
     this.paintingGridRowCount = rowCount;
   }
-  
+
   /////////// COLOR SELECTION TABLE ///////////
 
   // THIS SHOULD NOT BE DELETED, USED WITH 'color-selection.component.ts'
@@ -99,6 +100,25 @@ export class HomePageComponent implements OnInit {
     this.colorTableRows[index].color = color;
   }
 
+  ///////////// FORM RESET ///////////
+
+  resetForm() {
+    this.formState = 1;
+    this.form.reset();
+    this.formData = {
+      rows: 0,
+      cols: 0,
+      color: 0
+    }
+    this.colorTableRows = [];
+    this.paintingGridColCount = 0;
+    this.paintingGridRowCount = 0;
+  }
+
+  backToForm() {
+    --this.formState;
+  }
+
   ///////////// PRINTING ///////////
 
   triggerPrint(): void {
@@ -107,6 +127,7 @@ export class HomePageComponent implements OnInit {
 
   handlePrint(grayscale: boolean) {
     this.showPrintModal = false;
+    this.printMode = true;
 
     if (grayscale) {
       document.body.classList.add('grayscale-mode');
@@ -119,17 +140,48 @@ export class HomePageComponent implements OnInit {
       window.print();
       document.body.classList.remove('print-mode');
       document.body.classList.remove('grayscale-mode');
+
+      // Restore the print mode
+      this.printMode = false;
       this.restoreDOMAfterPrint();
     }, 100);
   }
 
   prepareDOMForPrint(): void {
-    const dropdowns = document.querySelectorAll('.dropdown, .radio-group, .interactive-ui');
-    dropdowns.forEach(el => el.classList.add('print-hidden'));
+    const navbar = document.querySelector('.navbar');
+    navbar && navbar.classList.add('print-hidden');
+
+    const header = document.querySelector('header');
+    header && header.classList.add('print-hidden');
+
+    const colorSelectionIntro = document.querySelector('.app-color-selection-intro');
+    colorSelectionIntro && colorSelectionIntro.classList.add('print-mode');
+    if (colorSelectionIntro) {
+      const colorSelectionTitle = colorSelectionIntro.querySelector('h2');
+      colorSelectionTitle && colorSelectionTitle
+    }
+
+    const colorSelectionTable = document.querySelector('.color-selection-table');
+    colorSelectionTable && colorSelectionTable.classList.add('print-mode');
+
+    const paintingGrid = document.querySelector('.painting-grid');
+    paintingGrid && paintingGrid.classList.add('print-mode');
+
+    const paintingGridIntro = document.querySelector('.color-painting-intro');
+    paintingGridIntro && paintingGridIntro.classList.add('print-mode');
+
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => section.classList.add('print-mode'));
+
+    const footer = document.querySelector('footer');
+    footer && footer.classList.add('print-hidden');
   }
 
   restoreDOMAfterPrint(): void {
     const hiddenEls = document.querySelectorAll('.print-hidden');
     hiddenEls.forEach(el => el.classList.remove('print-hidden'));
+
+    const printModeEls = document.querySelectorAll('.print-mode');
+    printModeEls.forEach(el => el.classList.remove('print-mode'));
   }
 }

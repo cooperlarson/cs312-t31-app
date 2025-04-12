@@ -30,6 +30,10 @@
     font-weight: 400;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
+
+  &.print-hidden {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -55,23 +59,18 @@
   margin-top: 2rem;
 }
 
-.print-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+.btn {
   padding: 0.9rem 2rem;
   font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 0.5px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: white;
-  background-color: rgba($primary, 0.35);
   border: 1px solid rgba($secondary, 0.6);
   border-radius: 8px;
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease-in-out;
-  position: relative;
   z-index: 2;
 
   .print-icon {
@@ -80,10 +79,46 @@
   }
 
   &:hover {
-    background-color: rgba($primary, 0.5);
     border-color: rgba($secondary, 0.5);
     cursor: pointer;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     transform: translateY(-1px);
+  }
+
+  &.print-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba($primary, 0.35);
+    position: relative;
+
+    &:hover {
+      background-color: rgba($primary, 0.5);
+    }
+  }
+
+  &.back-btn {
+    display: block;
+    background-color: rgba($accent, 0.6);
+    position: absolute;
+
+    &:hover {
+      background-color: rgba($error, 0.8);
+    }
+
+    @media (max-width: 768px) {
+      position: relative;
+      margin: 0 auto;
+    }
+  }
+
+  &.reset-btn {
+    display: block;
+    background-color: rgba($error, 0.6);
+    margin: 0 auto;
+
+    &:hover {
+      background-color: rgba($error, 0.8);
+    }
   }
 }

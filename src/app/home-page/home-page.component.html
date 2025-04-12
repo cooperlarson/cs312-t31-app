@@ -1,9 +1,11 @@
 <section class="home-page">
-  <header class="home-page-header">
-    <img [src]="logo.src" [alt]="logo.alt" class="brand-logo" />
-    <h1 class="brand-name">{{ header_title }}</h1>
-    <h2 class="brand-tagline">{{ header_subtitle }}</h2>
-  </header>
+  <ng-container *ngIf="!printMode">
+    <header class="home-page-header">
+      <img [src]="logo.src" [alt]="logo.alt" class="brand-logo" />
+      <h1 class="brand-name">{{ header_title }}</h1>
+      <h2 class="brand-tagline">{{ header_subtitle }}</h2>
+    </header>
+  </ng-container>
 
   <div class="content">
     <div class="form-wrapper">
@@ -14,6 +16,12 @@
         (submitted)="onFormSubmitted()"
       ></app-color-form>
     </div>
+
+    <ng-container *ngIf="formState >= 2 && !showPrintModal && !printMode">
+      <div class="back-btn-container">
+        <button class="btn back-btn" (click)="backToForm()">Back to Form</button>
+      </div>
+    </ng-container>
 
     <app-color-selection
       *ngIf="formState >= 2"
@@ -29,11 +37,16 @@
       [colCount]="paintingGridColCount"
     ></app-painting-grid>
 
-    <div class="print-btn-container">
-      <button class="print-btn" (click)="triggerPrint()">
-        <span class="print-icon">🖨️</span>Print
-      </button>
-    </div>
+    <ng-container *ngIf="formState >= 2 && !showPrintModal && !printMode">
+      <div class="print-btn-container">
+        <button class="btn print-btn" (click)="triggerPrint()">
+          <span class="print-icon">🖨️</span>Print
+        </button>
+      </div>
+      <div class="print-btn-container">
+        <button class="btn reset-btn" (click)="resetForm()">Reset</button>
+      </div>
+    </ng-container>
   </div>
 </section>
 
