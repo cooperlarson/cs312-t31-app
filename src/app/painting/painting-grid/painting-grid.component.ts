@@ -13,6 +13,7 @@ import { NgForOf } from '@angular/common';
 export class PaintingGridComponent {
   @Input() rowCount: number = 0;
   @Input() colCount: number = 0;
+  @Input() colorRows: { selected: boolean, color: string }[] = [];
 
   getRowNames() {
     return Array.from({ length: this.rowCount }, (_, i) => i + 1);
@@ -34,7 +35,12 @@ export class PaintingGridComponent {
     return cols;
   }
 
-  click(rn: String, cn: String) {
-    alert(rn+","+cn);
+  click(cn: String, rn: String) {
+    const selectedColor = this.colorRows.find(row => row.selected)?.color ?? "white";
+    const id = cn+','+rn;
+    const element = document.getElementById(id);
+    if(element!=undefined) {
+      element.style.backgroundColor = selectedColor;
+    }
   }
 }

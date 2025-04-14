@@ -12,7 +12,7 @@
     <tr *ngFor="let rn of getRowNames(); let i = index">
         <td class="gridName">{{ rn }}</td>
         <td *ngFor="let cn of getColumnNames(); let j = index">
-            <div (click)="click(cn, rn.toString())" class="gridCell"></div>
+            <div (click)="click(cn, rn.toString())" class="gridCell" [attr.id]="cn+','+rn"></div>
         </td>
     </tr>
   </table>
