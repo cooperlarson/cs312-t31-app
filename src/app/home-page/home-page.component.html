@@ -35,6 +35,7 @@
       *ngIf="formState >= 2"
       [rowCount]="paintingGridRowCount"
       [colCount]="paintingGridColCount"
+      [colorRows]="colorTableRows"
     ></app-painting-grid>
 
     <ng-container *ngIf="formState >= 2 && !showPrintModal && !printMode">
