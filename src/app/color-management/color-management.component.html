@@ -1,0 +1,48 @@
+<section class="color-management-page">
+  <h2>Color Management</h2>
+
+  <form [formGroup]="addColorForm" (ngSubmit)="addColor()">
+    <input type="text" formControlName="name" placeholder="Color Name" required />
+    <input type="color" formControlName="hex" />
+    <button type="submit">Add Color</button>
+  </form>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Hex</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let color of colors">
+      <td *ngIf="!color.editing">{{ color.name }}</td>
+
+      <td *ngIf="color.editing">
+        <input [(ngModel)]="color.name" />
+      </td>
+
+      <td *ngIf="!color.editing">
+        <div class="hex-display">
+          <span class="color-swatch" [style.backgroundColor]="color.hex"></span>
+          {{ color.hex }}
+        </div>
+      </td>
+
+      <td *ngIf="color.editing">
+        <input type="color" [(ngModel)]="color.hex" />
+      </td>
+
+      <td>
+        <div class="color-actions">
+          <button *ngIf="!color.editing" class="edit" (click)="enableEdit(color)">Edit</button>
+          <button *ngIf="color.editing" class="save" (click)="saveEdit(color)">Save</button>
+          <button class="delete" (click)="deleteColor(color)">Delete</button>
+        </div>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</section>

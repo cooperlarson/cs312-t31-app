@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-const mysqlConnector = require('./mysql-connector.js');
+const mysqlConnector = require('./mysql-connector.js')
 
 app.use(cors());
 app.use(express.json());
@@ -26,3 +26,8 @@ app.get('/test/', async (req, res) => {
         res.status(500).send('Internal Server Error');
       }
 });
+
+app.get('/api/colors/', async (req, res) => {
+    let data = await mysqlConnector.getTable("SELECT * FROM cs312_t31.colors;");
+    res.send(data);
+})
