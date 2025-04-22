@@ -22,6 +22,7 @@ function runQuery(query) {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
             if (err) {
+                connection.release();
                 return reject(`Error getting database connection: ${err.message}`);
             }
 
