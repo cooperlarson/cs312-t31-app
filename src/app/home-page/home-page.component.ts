@@ -97,7 +97,8 @@ export class HomePageComponent implements OnInit {
     // Update the color of the selected cells
     for (let i = 0; i < this.colorTableRows[index].selections.length; i++) {
       const shortenedId = this.colorTableRows[index].selections[i];
-      const id = shortenedId.length < 2 ? shortenedId : `${shortenedId[0]},${shortenedId[1]}`;
+      const match = shortenedId.match(/^([A-Z]+)(\d+)$/i);
+      const id = match ? `${match[1]},${match[2]}` : shortenedId;
       const element = document.getElementById(id);
       if (element) element.style.backgroundColor = color.hex;
     }
