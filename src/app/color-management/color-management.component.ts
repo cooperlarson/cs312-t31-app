@@ -2,13 +2,8 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Color, loadColors } from '../../util';
 
-interface Color {
-  id: number;
-  name: string;
-  hex: string;
-  editing?: boolean;
-}
 
 @Component({
   selector: 'app-color-management',
@@ -36,19 +31,9 @@ export class ColorManagementComponent {
     });
   }
 
-  // Dynamically get the base URL, trim it, and append :8443
-  base = window.location.origin.replace(/:\d+$/, '');
-  endpoint = `${this.base}:8443/api/colors`;
-
   ngOnInit(): void {
-    this.loadColors();
-  }
-
-  loadColors(): void {
-    this.http.get<Color[]>(this.endpoint).subscribe({
-      next: (data) => {
-        this.colors = data;
-      },
+    loadColors(this.http).subscribe({
+      next: (data) => this.colors = data,
       error: (err) => {
         console.error('Failed to load colors:', err);
         alert('Error loading colors. Check server logs or port.');

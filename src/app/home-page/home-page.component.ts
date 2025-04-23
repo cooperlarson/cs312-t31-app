@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ColorFormComponent } from '../color-form/color-form.component';
 import { NgIf } from '@angular/common';
 import { PrintModalComponent } from '../print-modal/print-modal.component';
 import { ColorSelectionComponent } from '../painting/color-selection/color-selection.component';
 import { PaintingGridComponent } from '../painting/painting-grid/painting-grid.component';
+import { Color, ColorRow, loadColors } from '../../util';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home-page',
-  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, PrintModalComponent, ColorSelectionComponent,PaintingGridComponent],
+  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, PrintModalComponent, ColorSelectionComponent,PaintingGridComponent, HttpClientModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent implements OnInit {
+  private readonly http = inject(HttpClient);
   header_title = 'HueGrid';
   header_subtitle = 'Your Color Palette Companion';
 
@@ -37,14 +40,6 @@ export class HomePageComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      rows: [1, [Validators.required, Validators.min(1), Validators.max(1000)]],
-      cols: [1, [Validators.required, Validators.min(1), Validators.max(702)]],
-      color: [1, [Validators.required, Validators.min(1), Validators.max(10)]]
-    });
-  }
-
   onFormSubmitted(): void {
     this.formData = this.form.value;
     console.log('Form Data Received:', this.formData);
@@ -67,11 +62,8 @@ export class HomePageComponent implements OnInit {
   /////////// COLOR SELECTION TABLE ///////////
 
   // THIS SHOULD NOT BE DELETED, USED WITH 'color-selection.component.ts'
-  colorTableRows: { selected: boolean, color: string }[] = [];
-  colors: string[] = [
-    'red', 'orange', 'yellow', 'green', 'blue',
-    'purple', 'grey', 'brown', 'black', 'teal'
-  ];
+  colorTableRows: ColorRow[] = [];
+  colors: Color[] = [];
 
   initColorTable(rowCount: number) {
     this.colorTableRows = [];
@@ -87,7 +79,7 @@ export class HomePageComponent implements OnInit {
     this.colorTableRows.forEach((row, i) => row.selected = i === index);
   }
 
-  handleColorChange(event: { index: number, color: string }) {
+  handleColorChange(event: { index: number, color: Color }) {
     const { index, color } = event;
 
     // Prevent duplicate colors
@@ -98,6 +90,23 @@ export class HomePageComponent implements OnInit {
     }
 
     this.colorTableRows[index].color = color;
+  }
+
+  ///////////// Initialization ///////////
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      rows: [1, [Validators.required, Validators.min(1), Validators.max(1000)]],
+      cols: [1, [Validators.required, Validators.min(1), Validators.max(702)]],
+      color: [1, [Validators.required, Validators.min(1), Validators.max(10)]]
+    });
+
+    loadColors(this.http).subscribe({
+      next: (data) => this.colors = data,
+      error: (err) => {
+        console.error('Failed to load colors:', err);
+        alert('Error loading colors. Check server logs or port.');
+      }
+    });
   }
 
   ///////////// FORM RESET ///////////

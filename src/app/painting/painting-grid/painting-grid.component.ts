@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgForOf } from '@angular/common';
+import { ColorRow } from '../../../util';
 
 @Component({
   selector: 'app-painting-grid',
@@ -13,7 +14,7 @@ import { NgForOf } from '@angular/common';
 export class PaintingGridComponent {
   @Input() rowCount: number = 0;
   @Input() colCount: number = 0;
-  @Input() colorRows: { selected: boolean, color: string }[] = [];
+  @Input() colorRows: ColorRow[] = [];
 
   getRowNames() {
     return Array.from({ length: this.rowCount }, (_, i) => i + 1);
@@ -36,7 +37,7 @@ export class PaintingGridComponent {
   }
 
   click(cn: String, rn: String) {
-    const selectedColor = this.colorRows.find(row => row.selected)?.color ?? "white";
+    const selectedColor = this.colorRows.find(row => row.selected)?.color.hex ?? "white";
     const id = cn+','+rn;
     const element = document.getElementById(id);
     if(element!=undefined) {
