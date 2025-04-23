@@ -13,9 +13,9 @@
         [checked]="row.selected"
         (change)="onSelect(i)"
       />
-      <select [value]="row.color" (change)="onColorChange(i, $event)">
-        <option *ngFor="let color of getAvailableColors(i)" [value]="color">
-          {{ color | titlecase }}
+      <select [value]="row.color.hex" (change)="onColorChange(i, $event)">
+        <option *ngFor="let color of getAvailableColors(i)" [value]="color.hex">
+          {{ color.name | titlecase }}
         </option>
       </select>
     </td>

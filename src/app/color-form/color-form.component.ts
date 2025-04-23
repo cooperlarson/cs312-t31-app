@@ -1,21 +1,21 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NgIf, NgForOf, TitleCasePipe } from '@angular/common';
+import { NgIf, NgForOf } from '@angular/common';
+import { Color } from '../../util';
 
 @Component({
   selector: 'app-color-form',
   imports: [
     ReactiveFormsModule,
     NgIf,
-    NgForOf,
-    TitleCasePipe
+    NgForOf
   ],
   templateUrl: './color-form.component.html',
   styleUrl: './color-form.component.scss'
 })
 export class ColorFormComponent {
   @Input() form!: FormGroup;
-  @Input() colors: string[] = [];
+  @Input() colors: Color[] = [];
   @Output() submitted = new EventEmitter<void>();
 
   errors = {
