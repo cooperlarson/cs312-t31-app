@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgForOf } from '@angular/common';
-import { ColorRow } from '../../../util';
+import { ColorRow, insertSorted, SelectionRow } from '../../../util';
 
 @Component({
   selector: 'app-painting-grid',
@@ -14,7 +14,7 @@ import { ColorRow } from '../../../util';
 export class PaintingGridComponent {
   @Input() rowCount: number = 0;
   @Input() colCount: number = 0;
-  @Input() colorRows: ColorRow[] = [];
+  @Input() colorRows: SelectionRow[] = [];
 
   getRowNames() {
     return Array.from({ length: this.rowCount }, (_, i) => i + 1);
@@ -36,12 +36,19 @@ export class PaintingGridComponent {
     return cols;
   }
 
-  click(cn: String, rn: String) {
-    const selectedColor = this.colorRows.find(row => row.selected)?.color.hex ?? "white";
-    const id = cn+','+rn;
-    const element = document.getElementById(id);
-    if(element!=undefined) {
-      element.style.backgroundColor = selectedColor;
+  click(cn: string, rn: string) {
+    const selectedRow = this.colorRows.find(row => row.row.selected);
+    const id = `${cn},${rn}`;
+
+    if (!selectedRow) {
+      alert('No color selected. Please select a color before painting.');
+      return;
     }
+
+    const element = document.getElementById(id);
+    if (element) element.style.backgroundColor = selectedRow.row.color.hex;
+
+    const condensedId = cn + rn;
+    if (!selectedRow.selections.includes(condensedId)) insertSorted(selectedRow.selections, condensedId);
   }
 }

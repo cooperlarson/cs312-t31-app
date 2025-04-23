@@ -5,7 +5,7 @@ import { NgIf } from '@angular/common';
 import { PrintModalComponent } from '../print-modal/print-modal.component';
 import { ColorSelectionComponent } from '../painting/color-selection/color-selection.component';
 import { PaintingGridComponent } from '../painting/painting-grid/painting-grid.component';
-import { Color, ColorRow, loadColors } from '../../util';
+import { Color, ColorRow, loadColors, SelectionRow } from '../../util';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
@@ -62,34 +62,45 @@ export class HomePageComponent implements OnInit {
   /////////// COLOR SELECTION TABLE ///////////
 
   // THIS SHOULD NOT BE DELETED, USED WITH 'color-selection.component.ts'
-  colorTableRows: ColorRow[] = [];
+  colorTableRows: SelectionRow[] = [];
   colors: Color[] = [];
 
   initColorTable(rowCount: number) {
     this.colorTableRows = [];
     for (let i = 0; i < rowCount; i++) {
       this.colorTableRows.push({
-        selected: false,
-        color: this.colors[i % this.colors.length]
+        row: {
+          selected: i === 0,
+          color: this.colors[i % this.colors.length]
+        },
+        selections: []
       });
     }
   }
 
   handleRowSelected(index: number) {
-    this.colorTableRows.forEach((row, i) => row.selected = i === index);
+    this.colorTableRows.forEach((row, i) => row.row.selected = i === index);
   }
 
   handleColorChange(event: { index: number, color: Color }) {
     const { index, color } = event;
 
     // Prevent duplicate colors
-    const isUsed = this.colorTableRows.some((row, i) => row.color === color && i !== index);
+    const isUsed = this.colorTableRows.some((row, i) => row.row.color === color && i !== index);
     if (isUsed) {
       alert('Color already used. Pick a different one.');
       return;
     }
 
-    this.colorTableRows[index].color = color;
+    this.colorTableRows[index].row.color = color;
+
+    // Update the color of the selected cells
+    for (let i = 0; i < this.colorTableRows[index].selections.length; i++) {
+      const shortenedId = this.colorTableRows[index].selections[i];
+      const id = shortenedId.length < 2 ? shortenedId : `${shortenedId[0]},${shortenedId[1]}`;
+      const element = document.getElementById(id);
+      if (element) element.style.backgroundColor = color.hex;
+    }
   }
 
   ///////////// Initialization ///////////

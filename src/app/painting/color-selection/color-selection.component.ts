@@ -1,16 +1,16 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgForOf, TitleCasePipe } from '@angular/common';
-import { Color, ColorRow } from '../../../util';
+import { NgForOf, NgIf, TitleCasePipe } from '@angular/common';
+import { Color, SelectionRow } from '../../../util';
 
 @Component({
   selector: 'app-color-selection',
   standalone: true,
-  imports: [NgForOf, TitleCasePipe],
+  imports: [NgForOf, TitleCasePipe, NgIf],
   templateUrl: './color-selection.component.html',
   styleUrl: './color-selection.component.scss'
 })
 export class ColorSelectionComponent {
-  @Input() rows: ColorRow[] = [];
+  @Input() rows: SelectionRow[] = [];
   @Input() allColors: Color[] = [];
 
   @Output() rowSelected = new EventEmitter<number>();
@@ -30,7 +30,7 @@ export class ColorSelectionComponent {
 
   getAvailableColors(index: number): Color[] {
     return this.allColors.filter(color =>
-      !this.rows.some((row, i) => row.color === color && i !== index)
+      !this.rows.some((row, i) => row.row.color === color && i !== index)
     );
   }
 }
