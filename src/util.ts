@@ -29,11 +29,8 @@ export function insertSorted(arr: string[], value: string) {
 
   while (low < high) {
     const mid = Math.floor((low + high) / 2);
-    if (arr[mid] < value) {
-      low = mid + 1;
-    } else {
-      high = mid;
-    }
+    if (arr[mid] < value) low = mid + 1;
+    else high = mid;
   }
 
   arr.splice(low, 0, value); // inserts at correct sorted position

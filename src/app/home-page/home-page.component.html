@@ -40,7 +40,7 @@
 
     <ng-container *ngIf="formState >= 2 && !showPrintModal && !printMode">
       <div class="print-btn-container">
-        <button class="btn print-btn" (click)="triggerPrint()"><span class="icon">🖨️ </span>Print</button>
+        <button class="btn print-btn" (click)="handlePrint()"><span class="icon">🖨️ </span>Print</button>
       </div>
       <div class="print-btn-container">
         <button class="btn reset-btn" (click)="resetForm()"><span class="icon">🔁 </span>Reset</button>
@@ -48,9 +48,3 @@
     </ng-container>
   </div>
 </section>
-
-<app-print-modal
-  *ngIf="showPrintModal"
-  (onDecision)="handlePrint($event)"
-  (onCancel)="showPrintModal = false">
-</app-print-modal>
