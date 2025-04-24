@@ -54,7 +54,7 @@ app.post('/api/colors/', async (req, res) => {
 app.put('/api/colors/', async (req, res) => {
   const { name, hex, id } = req.body;
   
-  if (!name || !hex || !id) return res.status(400).json({ error: 'Missing name or hex value.' });
+  if (!name || !hex || !id) return res.status(400).json({ error: 'Missing id, name or hex value.' });
 
   try {
     const result = await runQuery(
@@ -63,15 +63,25 @@ app.put('/api/colors/', async (req, res) => {
     );
     res.status(201).json({ success: true, insertedId: result.insertId });
   } catch (err) {
-    console.error('POST /api/colors failed:', err);
+    console.error('PUT /api/colors failed:', err);
     res.status(500).send('Internal Server Error');
   }
 });
 
 
 app.delete('/api/colors/', async (req, res) => {
-  const { name } = req.body;
-  // TODO: Validate name exists in body
-  // TODO: Execute SQL delete by name
-  // TODO: Return 404 if no matching color was deleted
+  const { id } = req.body;
+  
+  if (!id) return res.status(400).json({ error: 'Missing id.' });
+
+  try {
+    const result = await runQuery(
+      'DELETE FROM cs312_t31.colors WHERE id = ?;',
+      [id]
+    );
+    res.status(201).json({ success: true, deletedId: id });
+  } catch (err) {
+    console.error('DELETE /api/colors failed:', err);
+    res.status(500).send('Internal Server Error');
+  }
 });

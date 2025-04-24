@@ -94,18 +94,21 @@ export class ColorManagementComponent {
   }
 
   deleteColor(color: Color): void {
+    color.warning = undefined;
+
     if (this.colors.length <= this.minimumColors) {
       color.warning = 'You must keep at least one color.';
       return;
     }
 
-    // Optional: Confirm removal
     if (confirm(`Delete ${color.name}?`)) {
-      // TODO: Clear existing color.warning if not null
-      // TODO: Replace with DELETE call to backend
-      // TODO: Implement inline error handling by setting color.warning
-      // TODO: Remove color from this.colors
-      this.colors = this.colors.filter(c => c.id !== color.id);
+      this.http.delete(COLORS_API_ENDPOINT, { body: color }).subscribe({
+        next: (response: any) => {
+          console.log('Color deleted:', response);
+          this.colors = this.colors.filter(c => c.id !== color.id);
+        },
+        error: err => color.warning = 'Failed to delete color: ' + err.message
+      });
     }
   }
 }
