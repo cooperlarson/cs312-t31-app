@@ -2,15 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ColorFormComponent } from '../color-form/color-form.component';
 import { NgIf } from '@angular/common';
-import { PrintModalComponent } from '../print-modal/print-modal.component';
 import { ColorSelectionComponent } from '../painting/color-selection/color-selection.component';
 import { PaintingGridComponent } from '../painting/painting-grid/painting-grid.component';
-import { Color, ColorRow, loadColors, SelectionRow } from '../../util';
+import { Color, loadColors, SelectionRow } from '../../util';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home-page',
-  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, PrintModalComponent, ColorSelectionComponent,PaintingGridComponent, HttpClientModule],
+  imports: [NgIf, ReactiveFormsModule, ColorFormComponent, ColorSelectionComponent,PaintingGridComponent, HttpClientModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
@@ -146,14 +145,11 @@ export class HomePageComponent implements OnInit {
     this.showPrintModal = true;
   }
 
-  handlePrint(grayscale: boolean) {
+  handlePrint() {
     this.showPrintModal = false;
     this.printMode = true;
 
-    if (grayscale) {
-      document.body.classList.add('grayscale-mode');
-    }
-
+    document.body.classList.add('grayscale-mode');
     document.body.classList.add('print-mode');
     this.prepareDOMForPrint();
 
