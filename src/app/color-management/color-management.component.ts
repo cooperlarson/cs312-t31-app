@@ -71,15 +71,25 @@ export class ColorManagementComponent {
   }
 
   enableEdit(color: Color): void {
+    color.warning = undefined;
     color.editing = true;
   }
 
   saveEdit(color: Color): void {
-    // TODO: Clear existing color.warning if not null
-    // TODO: Replace with PUT call to backend
-    // TODO: Handle duplicate name/hex
-    // TODO: Implement inline error handling by setting color.warning
-    // TODO: Update color in this.colors
+    color.warning = undefined;
+
+    if (this.colors.some(c => (c.name === color.name || c.hex === color.hex) && c.id !== color.id)) {
+      color.warning = 'Duplicate color name or hex value.';
+      return;
+    }
+
+    this.http.put(COLORS_API_ENDPOINT, color).subscribe({
+      next: (response: any) => {
+        console.log('Color updated:', response);
+      },
+      error: err => color.warning = 'Failed to update color: ' + err.message
+    });
+
     color.editing = false;
   }
 
