@@ -7,6 +7,7 @@ export interface Color {
   name: string;
   hex: string;
   editing?: boolean;
+  warning?: string;
 }
 
 export interface ColorRow {
