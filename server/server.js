@@ -52,10 +52,20 @@ app.post('/api/colors/', async (req, res) => {
 });
 
 app.put('/api/colors/', async (req, res) => {
-  const { name, hex } = req.body;
-  // TODO: Validate name + hex inputs (basic string format check)
-  // TODO: Execute SQL update using name as the identifier
-  // TODO: Return 404 if no rows were updated
+  const { name, hex, id } = req.body;
+  
+  if (!name || !hex || !id) return res.status(400).json({ error: 'Missing name or hex value.' });
+
+  try {
+    const result = await runQuery(
+      'UPDATE cs312_t31.colors SET name = ?, hex = ? WHERE id = ?;',
+      [name, hex, id]
+    );
+    res.status(201).json({ success: true, insertedId: result.insertId });
+  } catch (err) {
+    console.error('POST /api/colors failed:', err);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 
