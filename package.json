@@ -1,6 +1,7 @@
 {
   "name": "cs312-t31-app",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
@@ -21,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
     "cors": "^2.8.5",
+    "express": "^5.1.0",
     "http-client": "^4.3.1",
     "mysql": "^2.18.1",
     "rxjs": "~7.8.0",
