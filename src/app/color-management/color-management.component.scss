@@ -10,21 +10,52 @@ $submit-btn-color: darken($success, 10%);
   width: calc(100% - (2 * #{$padding-x}));
   color: white;
 
-  form {
+  form.add-color-form {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-end;
     margin-bottom: 1rem;
 
-    input[type='color'] {
-      width: 60px;
-      height: 30px;
-      border: none;
-      padding: 0;
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      font-weight: 500;
+      font-size: 0.9rem;
+      gap: 4px;
+
+      input[type='text'],
+      input[type='color'] {
+        height: 32px;
+        padding: 4px 8px;
+        font-size: 0.9rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      input[type='color'] {
+        padding: 0;
+        height: 42px;
+        width: 60px;
+        cursor: pointer;
+      }
+    }
+
+    .hex-sync {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      .form-field {
+        flex-direction: column;
+      }
     }
 
     button[type='submit'] {
-      padding: 0.4rem 1rem;
+      height: 40px;
+      padding: 0 1.2rem;
       font-weight: 600;
+      font-size: 0.95rem;
       border: none;
       border-radius: 4px;
       background-color: $submit-btn-color;
@@ -103,4 +134,15 @@ $submit-btn-color: darken($success, 10%);
       }
     }
   }
+}
+
+.warning {
+  color: #c23030;
+  background-color: #ffe6e6;
+  padding: 6px 10px;
+  margin-top: 8px;
+  border: 1px solid #c23030;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
 }

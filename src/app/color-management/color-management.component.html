@@ -1,11 +1,37 @@
 <section class="color-management-page">
   <h2>Color Management</h2>
 
-  <form [formGroup]="addColorForm" (ngSubmit)="addColor()">
-    <input type="text" formControlName="name" placeholder="Color Name" required />
-    <input type="color" formControlName="hex" />
+  <form class="add-color-form" [formGroup]="addColorForm" (ngSubmit)="addColor()">
+    <label class="form-field">
+      Name:
+      <input type="text" formControlName="name" placeholder="Color Name" required />
+    </label>
+
+    <div class="hex-sync">
+      <label class="form-field">
+        Picker:
+        <input
+          type="color"
+          [value]="addColorForm.value.hex"
+          (input)="onColorPickerChange($event)"
+        />
+      </label>
+
+      <label class="form-field">
+        Hex:
+        <input
+          type="text"
+          formControlName="hex"
+          placeholder="#000000"
+          pattern="^#([A-Fa-f0-9]{6})$"
+        />
+      </label>
+    </div>
+
     <button type="submit">Add Color</button>
   </form>
+
+  <div *ngIf="addColorWarning" class="warning">{{ addColorWarning }}</div>
 
   <table>
     <thead>
@@ -40,6 +66,7 @@
           <button *ngIf="color.editing" class="save" (click)="saveEdit(color)">Save</button>
           <button class="delete" (click)="deleteColor(color)">Delete</button>
         </div>
+        <div *ngIf="color.warning" class="warning">{{ color.warning }}</div>
       </td>
 
     </tr>

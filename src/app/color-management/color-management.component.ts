@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { NgForOf, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Color, loadColors } from '../../util';
+import { COLORS_API_ENDPOINT } from '../../globals';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class ColorManagementComponent {
   private readonly http = inject(HttpClient);
   colors: Color[] = [];
   addColorForm: FormGroup;
-  minimumColors = 2;
+  minimumColors = 1;
+  addColorWarning: string | null = null;
 
   constructor(private fb: FormBuilder) {
     this.addColorForm = this.fb.group({
@@ -41,16 +43,31 @@ export class ColorManagementComponent {
     });
   }
 
+  onColorPickerChange(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.addColorForm.patchValue({ hex: value });
+  }
+
   addColor(): void {
+    this.addColorWarning = null;
     const newColor = this.addColorForm.value;
-    // TODO: Replace with POST call to backend
+
     if (this.colors.some(c => c.name === newColor.name || c.hex === newColor.hex)) {
-      alert('Duplicate color name or hex value.');
+      this.addColorWarning = 'Duplicate color name or hex value.';
       return;
     }
-    const nextId = Math.max(...this.colors.map(c => c.id)) + 1;
-    this.colors.push({ id: nextId, ...newColor });
-    this.addColorForm.reset({ name: '', hex: '#000000' });
+
+    this.http.post(COLORS_API_ENDPOINT, newColor).subscribe({
+      next: (response: any) => {
+        console.log('Color added:', response);
+
+        const nextId = Math.max(0, ...this.colors.map(c => c.id ?? 0)) + 1;
+        this.colors.push({ id: nextId, ...newColor });
+
+        this.addColorForm.reset({ name: '', hex: '#000000' });
+      },
+      error: err => this.addColorWarning = 'Failed to add color: ' + err.message
+    });
   }
 
   enableEdit(color: Color): void {
@@ -58,18 +75,26 @@ export class ColorManagementComponent {
   }
 
   saveEdit(color: Color): void {
+    // TODO: Clear existing color.warning if not null
     // TODO: Replace with PUT call to backend
+    // TODO: Handle duplicate name/hex
+    // TODO: Implement inline error handling by setting color.warning
+    // TODO: Update color in this.colors
     color.editing = false;
   }
 
   deleteColor(color: Color): void {
     if (this.colors.length <= this.minimumColors) {
-      alert('You must keep at least two colors.');
+      color.warning = 'You must keep at least one color.';
       return;
     }
 
+    // Optional: Confirm removal
     if (confirm(`Delete ${color.name}?`)) {
+      // TODO: Clear existing color.warning if not null
       // TODO: Replace with DELETE call to backend
+      // TODO: Implement inline error handling by setting color.warning
+      // TODO: Remove color from this.colors
       this.colors = this.colors.filter(c => c.id !== color.id);
     }
   }
