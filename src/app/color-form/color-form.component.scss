@@ -28,6 +28,25 @@ $success-button-bg: darken($success, 20%);
     color: $primary;
     font-size: 1.1rem;
     text-shadow: rgba(black, 0.2) 1px 1px 1px;
+
+    .hint {
+      font-size: 0.8rem;
+      color: darken($accent, 25%);
+      margin-top: 0.25rem;
+
+      a {
+        color: lighten($primary, 15%);
+        text-decoration: underline;
+        font-weight: 600;
+        transition: all 0.2s ease;
+
+        &:hover {
+          color: lighten($primary, 25%);
+          text-decoration-thickness: 2px;
+          text-underline-offset: 2px;
+        }
+      }
+    }
   }
 
   input,

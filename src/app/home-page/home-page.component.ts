@@ -25,6 +25,7 @@ export class HomePageComponent implements OnInit {
 
   showPrintModal = false;
   printMode = false;
+  maxColors = 0;
 
   formState = 1;  // Global form state
 
@@ -108,11 +109,14 @@ export class HomePageComponent implements OnInit {
     this.form = this.fb.group({
       rows: [1, [Validators.required, Validators.min(1), Validators.max(1000)]],
       cols: [1, [Validators.required, Validators.min(1), Validators.max(702)]],
-      color: [1, [Validators.required, Validators.min(1), Validators.max(Math.pow(2,2))]]
+      color: [1, [Validators.required, Validators.min(1), Validators.max(this.maxColors)]]
     });
 
     loadColors(this.http).subscribe({
-      next: (data) => this.colors = data,
+      next: (data) => {
+        this.colors = data;
+        this.maxColors = Math.max(2, this.colors.length);
+      },
       error: (err) => {
         console.error('Failed to load colors:', err);
         alert('Error loading colors. Check server logs or port.');
