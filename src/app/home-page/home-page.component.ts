@@ -25,7 +25,7 @@ export class HomePageComponent implements OnInit {
 
   showPrintModal = false;
   printMode = false;
-  maxColors = 0;
+  maxColors = 2;
 
   formState = 1;  // Global form state
 
@@ -116,6 +116,13 @@ export class HomePageComponent implements OnInit {
       next: (data) => {
         this.colors = data;
         this.maxColors = Math.max(2, this.colors.length);
+
+        this.form.get('color')?.setValidators([
+          Validators.required,
+          Validators.min(1),
+          Validators.max(this.maxColors)
+        ]);
+        this.form.get('color')?.updateValueAndValidity();
       },
       error: (err) => {
         console.error('Failed to load colors:', err);
