@@ -2,13 +2,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgIf, NgForOf } from '@angular/common';
 import { Color } from '../../util';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-color-form',
   imports: [
     ReactiveFormsModule,
     NgIf,
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './color-form.component.html',
   styleUrl: './color-form.component.scss'
@@ -16,6 +18,7 @@ import { Color } from '../../util';
 export class ColorFormComponent {
   @Input() form!: FormGroup;
   @Input() colors: Color[] = [];
+  @Input() maxColors = 0;
   @Output() submitted = new EventEmitter<void>();
 
   errors = {
@@ -32,7 +35,7 @@ export class ColorFormComponent {
     color: {
       required: 'Color is required',
       min: 'Minimum value is 1',
-      max: 'Maximum value is 10'
+      max: 'Maximum value is ' + this.maxColors
     }
   };
 
@@ -58,4 +61,6 @@ export class ColorFormComponent {
 
     this.submitted.emit();
   }
+
+  protected readonly Math = Math;
 }

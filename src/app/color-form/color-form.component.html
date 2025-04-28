@@ -21,8 +21,15 @@
   </div>
 
   <div class="form-control">
-    <label for="color">Colors (1 - 10)</label>
+    <label for="color">
+      Select Colors (1 – {{ maxColors }})
+      <span *ngIf="maxColors < Math.pow(2, 24)" class="hint">
+      – Add more colors on the <a routerLink="/colors">Colors</a> page
+    </span>
+    </label>
+
     <input type="number" id="color" formControlName="color" />
+
     <div class="warning" *ngIf="isTouchedAndInvalid('color')">
       <ng-container *ngFor="let errorKey of getErrorKeys('color')">
         <span>{{ getErrorMessage('color', errorKey) }}</span>
