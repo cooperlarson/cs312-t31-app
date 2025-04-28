@@ -108,7 +108,7 @@ export class HomePageComponent implements OnInit {
     this.form = this.fb.group({
       rows: [1, [Validators.required, Validators.min(1), Validators.max(1000)]],
       cols: [1, [Validators.required, Validators.min(1), Validators.max(702)]],
-      color: [1, [Validators.required, Validators.min(1), Validators.max(10)]]
+      color: [1, [Validators.required, Validators.min(1), Validators.max(Math.pow(2,2))]]
     });
 
     loadColors(this.http).subscribe({
