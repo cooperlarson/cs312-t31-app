@@ -8,6 +8,7 @@ export interface Color {
   hex: string;
   editing?: boolean;
   warning?: string;
+  confirmDelete?: boolean;
 }
 
 export interface ColorRow {

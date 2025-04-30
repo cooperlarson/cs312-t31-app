@@ -94,21 +94,28 @@ export class ColorManagementComponent {
   }
 
   deleteColor(color: Color): void {
+    this.colors.forEach(c => { if (c !== color) c.confirmDelete = false; });
+    color.confirmDelete = true;
+  }
+
+  confirmDeleteColor(color: Color): void {
     color.warning = undefined;
 
     if (this.colors.length <= this.minimumColors) {
-      color.warning = 'You must keep at least one color.';
+      color.warning = 'You must keep at least two colors.';
+      color.confirmDelete = false;
       return;
     }
 
-    if (confirm(`Delete ${color.name}?`)) {
-      this.http.delete(COLORS_API_ENDPOINT, { body: color }).subscribe({
-        next: (response: any) => {
-          console.log('Color deleted:', response);
-          this.colors = this.colors.filter(c => c.id !== color.id);
-        },
-        error: err => color.warning = 'Failed to delete color: ' + err.message
-      });
-    }
+    this.http.delete(COLORS_API_ENDPOINT, { body: color }).subscribe({
+      next: () => {
+        this.colors = this.colors.filter(c => c.id !== color.id);
+      },
+      error: err => color.warning = 'Failed to delete color: ' + err.message
+    });
+  }
+
+  cancelDelete(color: Color): void {
+    color.confirmDelete = false;
   }
 }
