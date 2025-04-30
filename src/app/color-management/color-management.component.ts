@@ -23,7 +23,7 @@ export class ColorManagementComponent {
   private readonly http = inject(HttpClient);
   colors: Color[] = [];
   addColorForm: FormGroup;
-  minimumColors = 1;
+  minimumColors = 2;
   addColorWarning: string | null = null;
 
   constructor(private fb: FormBuilder) {
