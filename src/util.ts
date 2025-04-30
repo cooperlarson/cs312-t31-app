@@ -20,6 +20,22 @@ export interface SelectionRow {
   selections: string[]
 }
 
+export function binarySearch(arr: string[], target: string): number {
+  let low = 0;
+  let high = arr.length - 1;
+
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    const cmp = arr[mid].localeCompare(target);
+
+    if (cmp === 0) return mid;
+    if (cmp < 0) low = mid + 1;
+    else high = mid - 1;
+  }
+
+  return -1;
+}
+
 export function loadColors(http: HttpClient): Observable<Color[]> {
   return http.get<Color[]>(COLORS_API_ENDPOINT);
 }

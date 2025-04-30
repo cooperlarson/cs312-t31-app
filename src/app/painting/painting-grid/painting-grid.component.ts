@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgForOf } from '@angular/common';
-import { ColorRow, insertSorted, SelectionRow } from '../../../util';
+import { binarySearch, ColorRow, insertSorted, SelectionRow } from '../../../util';
 
 @Component({
   selector: 'app-painting-grid',
@@ -45,10 +45,23 @@ export class PaintingGridComponent {
       return;
     }
 
-    const element = document.getElementById(id);
-    if (element) element.style.backgroundColor = selectedRow.row.color.hex;
-
     const condensedId = cn + rn;
-    if (!selectedRow.selections.includes(condensedId)) insertSorted(selectedRow.selections, condensedId);
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    // Check if the selected color is already applied to a different color
+    const oldColor = this.colorRows.find(row => binarySearch(row.selections, condensedId) !== -1);
+
+    // If the old color is different from the new selected color, remove the selection from the old color
+    if (oldColor && oldColor.row.color.hex !== selectedRow.row.color.hex) {
+      const index = binarySearch(oldColor.selections, condensedId);
+      if (index !== -1) oldColor.selections.splice(index, 1);
+    }
+
+    // Add the selection to the new selected color if it doesn't already exist
+    if (binarySearch(selectedRow.selections, condensedId) === -1) insertSorted(selectedRow.selections, condensedId);
+
+    // Change the background color of the selected cell
+    element.style.backgroundColor = selectedRow.row.color.hex;
   }
 }
