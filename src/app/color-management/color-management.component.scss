@@ -97,6 +97,23 @@ $submit-btn-color: darken($success, 10%);
   .color-actions {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
+
+    .confirm-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .confirm-text {
+      font-weight: 600;
+    }
+
+    .confirm-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.3rem;
+    }
 
     button {
       padding: 0.35rem 0.75rem;
@@ -105,11 +122,10 @@ $submit-btn-color: darken($success, 10%);
       font-weight: 500;
       cursor: pointer;
       transition: background-color 0.2s ease-in-out;
+      color: white;
 
       &.edit {
         background-color: $edit-btn-color;
-        color: white;
-
         &:hover {
           background-color: lighten($edit-btn-color, 10%);
         }
@@ -117,8 +133,6 @@ $submit-btn-color: darken($success, 10%);
 
       &.delete {
         background-color: $error;
-        color: white;
-
         &:hover {
           background-color: lighten($error, 10%);
         }
@@ -126,10 +140,22 @@ $submit-btn-color: darken($success, 10%);
 
       &.save {
         background-color: lighten($accent, 10%);
-        color: white;
-
         &:hover {
           background-color: $accent;
+        }
+      }
+
+      &.confirm {
+        background-color: darken($success, 15%);
+        &:hover {
+          background-color: darken($success, 10%);
+        }
+      }
+
+      &.cancel {
+        background-color: darken($error, 10%);
+        &:hover {
+          background-color: $error;
         }
       }
     }

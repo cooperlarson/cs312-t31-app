@@ -62,9 +62,20 @@
 
       <td>
         <div class="color-actions">
-          <button *ngIf="!color.editing" class="edit" (click)="enableEdit(color)">Edit</button>
-          <button *ngIf="color.editing" class="save" (click)="saveEdit(color)">Save</button>
-          <button class="delete" (click)="deleteColor(color)">Delete</button>
+          <ng-container *ngIf="!color.confirmDelete; else confirmDeleteTpl">
+            <button *ngIf="!color.editing" class="edit" (click)="enableEdit(color)">Edit</button>
+            <button *ngIf="color.editing" class="save" (click)="saveEdit(color)">Save</button>
+            <button class="delete" (click)="deleteColor(color)">Delete</button>
+          </ng-container>
+          <ng-template #confirmDeleteTpl>
+            <div class="confirm-wrapper">
+              <span class="confirm-text">Are you sure you'd like to delete '{{ color.name }}'?</span>
+              <div class="confirm-buttons">
+                <button class="confirm" (click)="confirmDeleteColor(color)">Confirm</button>
+                <button class="cancel" (click)="cancelDelete(color)">Cancel</button>
+              </div>
+            </div>
+          </ng-template>
         </div>
         <div *ngIf="color.warning" class="warning">{{ color.warning }}</div>
       </td>
