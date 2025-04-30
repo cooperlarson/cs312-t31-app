@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgForOf } from '@angular/common';
-import { binarySearch, ColorRow, insertSorted, SelectionRow } from '../../../util';
+import { binarySearch, insertSorted, SelectionRow } from '../../../util';
 
 @Component({
   selector: 'app-painting-grid',
