@@ -5,8 +5,10 @@
   "scripts": {
     "ng": "ng",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "serve": "concurrently \"npm run start:frontend-serve\" \"npm run start:backend\"",
     "start:frontend": "ng serve",
     "start:backend": "node server/server.js",
+    "start:frontend-serve": "ng serve --host saint-paul.cs.colostate.edu --port 4323",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
