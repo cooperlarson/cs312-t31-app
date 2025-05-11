@@ -7,7 +7,7 @@ const app = express();
 const webServer = http.createServer(app);
 
 app.use(cors({
-  origin: ['http://localhost:4200', 'http://saint-paul.cs.colostate.edu:4323'],
+  origin: ['http://localhost:4200', 'http://localhost:4323'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
