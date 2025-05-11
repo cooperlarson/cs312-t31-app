@@ -1,19 +1,21 @@
-<div class="color-painting-intro">
-  <h2>Painting Grid</h2>
-  <h3>Click on a cell to select a color for that row and column.</h3>
-</div>
+<div class="painting-component">
+  <div class="color-painting-intro">
+    <h2>Painting Grid</h2>
+    <h3>Click on a cell to select a color for that row and column.</h3>
+  </div>
 
-<div class="container painting-grid">
-  <table class="gridTable">
-    <tr>
+  <div class="container painting-grid">
+    <table class="gridTable">
+      <tr>
         <td class="gridName">~</td>
         <td class="gridName" *ngFor="let cn of getColumnNames()">{{ cn }}</td>
-    </tr>
-    <tr *ngFor="let rn of getRowNames(); let i = index">
+      </tr>
+      <tr *ngFor="let rn of getRowNames(); let i = index">
         <td class="gridName">{{ rn }}</td>
         <td *ngFor="let cn of getColumnNames(); let j = index">
-            <div (click)="click(cn, rn.toString())" class="gridCell" [attr.id]="cn+','+rn"></div>
+          <div (click)="click(cn, rn.toString())" class="gridCell" [attr.id]="cn+','+rn"></div>
         </td>
-    </tr>
-  </table>
+      </tr>
+    </table>
+  </div>
 </div>

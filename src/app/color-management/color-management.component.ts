@@ -48,6 +48,11 @@ export class ColorManagementComponent {
     this.addColorForm.patchValue({ hex: value });
   }
 
+  onInlineColorPickerChange(event: Event, color: Color): void {
+    const value = (event.target as HTMLInputElement).value;
+    color.hex = value;
+  }
+
   addColor(): void {
     this.addColorWarning = null;
     const newColor = this.addColorForm.value;

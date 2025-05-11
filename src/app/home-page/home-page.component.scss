@@ -1,8 +1,8 @@
 @use 'styles' as *;
 
-$back-btn-color: darken($accent, 40%);
-$reset-btn-color: darken($error, 20%);
-$print-btn-color: darken($success, 20%);
+$back-btn-color: darken($accent, 36%);
+$reset-btn-color: darken($error, 22%);
+$print-btn-color: darken($success, 24%);
 
 .home-page-header {
   width: 100%;
@@ -63,6 +63,18 @@ $print-btn-color: darken($success, 20%);
   margin-top: 2rem;
 }
 
+.upper-btn-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
 .btn {
   padding: 0.9rem 2rem;
   font-size: 1.1rem;
@@ -93,21 +105,20 @@ $print-btn-color: darken($success, 20%);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: rgba($print-btn-color, 0.8);
+    background-color: $print-btn-color;
     position: relative;
 
     &:hover {
-      background-color: $print-btn-color;
+      background-color: darken($print-btn-color, 5%);
     }
   }
 
   &.back-btn {
     display: block;
-    background-color: rgba($back-btn-color, 0.6);
-    position: absolute;
+    background-color: $back-btn-color;
 
     &:hover {
-      background-color: rgba($back-btn-color, 0.8);
+      background-color: darken($back-btn-color, 5%);
     }
 
     @media (max-width: 768px) {
@@ -118,11 +129,10 @@ $print-btn-color: darken($success, 20%);
 
   &.reset-btn {
     display: block;
-    background-color: rgba($reset-btn-color, 0.8);
-    margin: -10px auto 0;
+    background-color: $reset-btn-color;
 
     &:hover {
-      background-color: $reset-btn-color;
+      background-color: darken($reset-btn-color, 5%);
     }
   }
 }

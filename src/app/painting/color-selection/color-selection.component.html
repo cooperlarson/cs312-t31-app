@@ -1,45 +1,47 @@
-<div class="app-color-selection-intro">
-  <h2>Select a color for each row</h2>
-  <h2 class="print-title">Color Selection</h2>
-  <h3>You can only use each color once!</h3>
-</div>
+<div class="color-selection">
+  <div class="app-color-selection-intro">
+    <h2>Select a color for each row</h2>
+    <h2 class="print-title">Color Selection</h2>
+    <h3>You can only use each color once!</h3>
+  </div>
 
-<table class="color-selection-table" style="width: 100%;">
-  <tr *ngFor="let row of rows; let i = index">
-    <td class="left">
-      <div class="color-control">
-        <label class="radio-wrap">
-          <input
-            type="radio"
-            name="selectedRow"
-            [checked]="row.row.selected"
-            (change)="onSelect(i)"
-          />
-          <span class="custom-radio"></span>
-        </label>
+  <table class="color-selection-table" style="width: 100%;">
+    <tr *ngFor="let row of rows; let i = index">
+      <td class="left">
+        <div class="color-control">
+          <label class="radio-wrap">
+            <input
+              type="radio"
+              name="selectedRow"
+              [checked]="row.row.selected"
+              (change)="onSelect(i)"
+            />
+            <span class="custom-radio"></span>
+          </label>
 
-        <select
-          class="color-select"
-          [value]="row.row.color.hex"
-          (change)="onColorChange(i, $event)"
-        >
-          <option
-            *ngFor="let color of getAvailableColors(i)"
-            [value]="color.hex"
+          <select
+            class="color-select"
+            [value]="row.row.color.hex"
+            (change)="onColorChange(i, $event)"
           >
-            {{ color.name | titlecase }}
-          </option>
-        </select>
-      </div>
-    </td>
-    <td style="width: 80%;" class="right">
-      <div *ngIf="row.selections.length > 0">
-        <strong>Selected:</strong> {{ row.selections.join(', ') }}
-      </div>
-      <div *ngIf="row.selections.length === 0">
-        <em>No cells selected yet</em>
-      </div>
-    </td>
+            <option
+              *ngFor="let color of getAvailableColors(i)"
+              [value]="color.hex"
+            >
+              {{ color.name | titlecase }}
+            </option>
+          </select>
+        </div>
+      </td>
+      <td style="width: 80%;" class="right">
+        <div *ngIf="row.selections.length > 0">
+          <strong>Selected:</strong> {{ row.selections.join(', ') }}
+        </div>
+        <div *ngIf="row.selections.length === 0">
+          <em>No cells selected yet</em>
+        </div>
+      </td>
 
-  </tr>
-</table>
+    </tr>
+  </table>
+</div>

@@ -1,3 +1,12 @@
+@use 'styles' as *;
+
+.painting-component {
+  background: rgba(black, 0.85);
+  margin: 2rem 0;
+  border-radius: 2rem;
+  padding: 1rem 1.5rem 3rem;
+}
+
 .color-painting-intro {
   h2{
     vertical-align: middle;
@@ -28,29 +37,29 @@
 }
 
 .container.painting-grid {
-    width: auto;
-    margin: 0 auto;
-    height: 100%;
-    max-height: 80vh;
-    overflow: scroll;
-    color: black;
+  width: auto;
+  margin: 0 auto;
+  height: 100%;
+  max-height: 80vh;
+  overflow: scroll;
+  color: black;
 
-    &.print-mode {
-      overflow: visible;
+  &.print-mode {
+    overflow: visible;
 
-      .gridCell {
-        border: 1px solid black;
-      }
-
-      .gridName {
-        color: black;
-      }
+    .gridCell {
+      border: 1px solid black;
     }
+
+    .gridName {
+      color: black;
+    }
+  }
 }
 
 .gridName {
     text-align: center;
-    background-color: rgb(36, 36, 36);
+    background-color: transparent;
     color: white;
 }
 

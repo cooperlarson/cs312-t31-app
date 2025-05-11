@@ -2,13 +2,25 @@
 
 $padding-y: 1rem;
 $padding-x: 2rem;
-$edit-btn-color: darken($accent, 10%);
-$submit-btn-color: darken($success, 10%);
+$edit-btn-color: darken($accent, 5%);
+$submit-btn-color: lighten($success, 10%);
+$delete-btn-color: lighten($error, 23%);
 
 .color-management-page {
   padding: $padding-y $padding-x;
   width: calc(100% - (2 * #{$padding-x}));
   color: white;
+  background: darken($primary, 8%);
+  display: flex;
+  justify-content: center;
+
+  .page-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: rgba(black, 0.2) 1px 1px 1px;
+  }
 
   form.add-color-form {
     display: flex;
@@ -59,7 +71,7 @@ $submit-btn-color: darken($success, 10%);
       border: none;
       border-radius: 4px;
       background-color: $submit-btn-color;
-      color: white;
+      color: darken($primary, 7%);
       cursor: pointer;
       transition: background-color 0.2s ease;
 
@@ -71,6 +83,7 @@ $submit-btn-color: darken($success, 10%);
 
   table {
     width: 100%;
+    max-width: 600px;
     border-collapse: collapse;
     margin-top: 1rem;
 
@@ -122,7 +135,8 @@ $submit-btn-color: darken($success, 10%);
       font-weight: 500;
       cursor: pointer;
       transition: background-color 0.2s ease-in-out;
-      color: white;
+      color: darken($primary, 15%);
+      width: 48%;
 
       &.edit {
         background-color: $edit-btn-color;
@@ -132,33 +146,60 @@ $submit-btn-color: darken($success, 10%);
       }
 
       &.delete {
-        background-color: $error;
+        background-color: $delete-btn-color;
         &:hover {
-          background-color: lighten($error, 10%);
+          background-color: lighten($delete-btn-color, 10%);
         }
       }
 
       &.save {
-        background-color: lighten($accent, 10%);
+        background-color: $submit-btn-color;
         &:hover {
-          background-color: $accent;
+          background-color: lighten($submit-btn-color, 10%);
         }
       }
 
       &.confirm {
-        background-color: darken($success, 15%);
+        background-color: $submit-btn-color;
         &:hover {
-          background-color: darken($success, 10%);
+          background-color: lighten($submit-btn-color, 10%);
         }
       }
 
       &.cancel {
-        background-color: darken($error, 10%);
+        background-color: $delete-btn-color;
         &:hover {
-          background-color: $error;
+          background-color: lighten($delete-btn-color, 10%);
         }
       }
     }
+  }
+}
+
+.color-edit-input {
+  width: 20%;
+
+  input.edit-name-input {
+    width: 30px;
+  }
+}
+
+td .hex-sync {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  .form-field {
+    flex-direction: column;
+  }
+
+  input[type="color"] {
+    width: 30px;
+    height: 30px;
+  }
+
+  input[type="text"] {
+    width: 60px;
   }
 }
 

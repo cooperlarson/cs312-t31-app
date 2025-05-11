@@ -1,9 +1,9 @@
 @use 'styles' as *;
 
-$form-bg: rgba(255, 255, 255, 0.7);
+$form-bg: rgba(black, 0.8);
 $input-bg: rgba(darken($primary, 20%), 0.6);
 $text-color: #ffffff;
-$success-button-bg: darken($success, 20%);
+$success-button-bg: lighten($success, 20%);
 
 .form-container {
   max-width: 400px;
@@ -25,17 +25,17 @@ $success-button-bg: darken($success, 20%);
 
   label {
     margin-bottom: 0.5rem;
-    color: $primary;
+    color: white;
     font-size: 1.1rem;
     text-shadow: rgba(black, 0.2) 1px 1px 1px;
 
     .hint {
       font-size: 0.8rem;
-      color: darken($accent, 25%);
+      color: lighten($accent, 10%);
       margin-top: 0.25rem;
 
       a {
-        color: lighten($primary, 15%);
+        color: lighten($accent, 15%);
         text-decoration: underline;
         font-weight: 600;
         transition: all 0.2s ease;
@@ -81,7 +81,7 @@ select.ng-valid.ng-touched {
 
 button {
   background: $success-button-bg;
-  color: white;
+  color: darken($primary, 2%);
   border: none;
   padding: 1rem;
   font-size: 1rem;
@@ -103,5 +103,5 @@ button {
 }
 
 button:hover {
-  background: darken($success, 10%);
+  background: $success;
 }
