@@ -9,7 +9,7 @@ const webServer = http.createServer(app);
 app.use(cors({
   origin: ['http://localhost:4323', 'http://localhost:4200'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  credentials: false
 }));
 
 app.use(express.json());
