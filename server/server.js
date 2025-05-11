@@ -6,12 +6,7 @@ import { getTable, runQuery } from './mysql-connector.js';
 const app = express();
 const webServer = http.createServer(app);
 
-app.use(cors({
-  origin: ['http://localhost:4200', 'http://localhost:4323'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
-
+app.use(cors());
 app.use(express.json());
 
 webServer.listen(8443, () => console.log("server live at http://localhost:8443/"));
